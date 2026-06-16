@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Akun — SeminarKu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="background-color: #f8f9fa;">
+    <div style="max-width: 400px; margin: 80px auto; padding: 30px; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h2 style="color: #b89400; margin-bottom: 20px; text-align: center;">Daftar Akun Baru</h2>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div style="padding: 10px; margin-bottom: 15px; color: #721c24; background-color: #f8d7da; border-radius: 4px;">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="/register">
+            <label style="font-weight: bold; font-size: 14px;">Username / NIM</label>
+            <input type="text" name="username" required style="width:100%; margin: 8px 0 16px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+            
+            <label style="font-weight: bold; font-size: 14px;">Password</label>
+            <input type="password" name="password" required style="width:100%; margin: 8px 0 16px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+            
+            <label style="font-weight: bold; font-size: 14px;">Daftar Sebagai</label>
+            <select name="role" style="width:100%; margin: 8px 0 20px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                <option value="mahasiswa">Mahasiswa</option>
+                <option value="admin">Admin</option>
+            </select>
+            
+            <button type="submit" style="width:100%; padding:12px; background:#b89400; color:white; border:none; border-radius:4px; font-weight:bold; cursor:pointer;">Daftar Sekarang</button>
+        </form>
+        <p style="margin-top:20px; text-align: center; font-size: 14px;">Sudah punya akun? <a href="/login" style="color: #1E3A6E; text-decoration: none; font-weight: bold;">Login di sini</a></p>
+    </div>
+</body>
+</html>

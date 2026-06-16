@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Mahasiswa — SeminarKu</title>
+</head>
+<body style="padding: 30px; font-family: sans-serif; background: #f4f6f9;">
+    <div style="max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <h2>Dashboard Mahasiswa</h2>
+        <p>Selamat Datang, <strong>{{ session['username'] }}</strong> | <a href="/logout" style="color: red;">Keluar</a></p>
+        <hr>
+        
+        <h3>Daftar Seminar Kampus Tersedia</h3>
+        <table border="1" cellpadding="8" style="width: 100%; border-collapse: collapse; text-align: left;">
+            <tr style="background: #eee;"><th>Judul Seminar</th><th>Pembicara</th><th>Jadwal</th><th>Kuota</th><th>Aksi</th></tr>
+            {% for s in seminars %}
+            <tr>
+                <td>{{ s.judul }}</td>
+                <td>{{ s.pembicara }}</td>
+                <td>{{ s.jadwal }}</td>
+                <td>{{ s.kuota }}</td>
+                <td>
+                    <form action="/booking/{{ s.id }}" method="POST">
+                        <button type="submit" style="background: #b89400; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Booking</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <hr style="margin-top: 30px;">
+
+        <h3>Status Permohonan Booking Kamu</h3>
+        <ul>
+            {% for b in my_bookings %}
+            <li>{{ b.judul }} ({{ b.jadwal }}) — Status: <strong style="color: blue;">{{ b.status }}</strong></li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

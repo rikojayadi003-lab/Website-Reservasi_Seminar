@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Admin — SeminarKu</title>
+</head>
+<body style="padding: 30px; font-family: sans-serif; background: #f4f6f9;">
+    <div style="max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <h2>Panel Kontrol Admin</h2>
+        <p>Login sebagai: <strong>{{ session['username'] }}</strong> | <a href="/logout" style="color: red;">Keluar</a></p>
+        <hr>
+
+        <h3>Tambah & Update Seminar Terbaru</h3>
+        <form method="POST" style="margin-bottom: 30px;">
+            <input type="text" name="judul" placeholder="Judul Seminar" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+            <input type="text" name="pembicara" placeholder="Pembicara" required style="width: 100%; padding: 8px; margin-bottom: 10px;"><br>
+            <input type="datetime-local" name="jadwal" required style="padding: 8px; margin-bottom: 10px;"><br>
+            <input type="number" name="kuota" placeholder="Kuota Peserta" required style="padding: 8px; margin-bottom: 10px;"><br>
+            <button type="submit" style="padding: 10px 20px; background: #1E3A6E; color: white; border: none; border-radius: 4px; cursor: pointer;">Update Seminar Terbaru</button>
+        </form>
+        <hr>
+
+        <h3>Persetujuan Reservasi Seminar (Pending)</h3>
+        <table border="1" cellpadding="8" style="width: 100%; border-collapse: collapse; text-align: left;">
+            <tr style="background: #eee;"><th>Mahasiswa</th><th>Seminar</th><th>Aksi</th></tr>
+            {% for b in bookings %}
+            <tr>
+                <td>{{ b.username }}</td>
+                <td>{{ b.judul }}</td>
+                <td>
+                    <a href="/admin/booking/{{ b.id }}/approve" style="color: green; font-weight: bold; text-decoration: none;">Terima</a> | 
+                    <a href="/admin/booking/{{ b.id }}/reject" style="color: red; font-weight: bold; text-decoration: none;">Tolak</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
