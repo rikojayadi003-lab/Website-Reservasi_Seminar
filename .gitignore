@@ -1,0 +1,22 @@
+# Cache Python (Ini yang paling sering bikin kotor repositori)
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Environment Virtual Lokal (Jika kamu pernah membuatnya di laptop)
+venv/
+env/
+.venv/
+ENV/
+
+# Folder Konfigurasi Project IDX (Google Cloud)
+.idx/
+
+# File Log dan Sistem Operasi
+*.log
+.DS_Store
+Thumbs.db
+
+# File konfigurasi sensitif (Opsional, jika ke depan kamu pakai .env)
+.env
