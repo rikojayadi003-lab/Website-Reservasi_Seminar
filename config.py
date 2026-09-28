@@ -1,19 +1,22 @@
+
+import os
 import pymysql
-from dbutils.pooled_db import PooledDB
-
-DB_CONFIG = {
-    'host': "gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com", 
-    'port': 4000,
-    'user': "dWvV6NjZWtDcYdR.root",                 
-    'password': "bma7yOw0fsh9exQM",           
-    'database': "seminar_reservasi",       
-    'cursorclass': pymysql.cursors.DictCursor,
-    'ssl': {
-        'min_version': 'TLSv1.2' 
-    }
-}
-
-pool = PooledDB(pymysql, maxconnections=5, **DB_CONFIG)
+import certifi
 
 def get_db_connection():
-    return pool.connection()
+    return pymysql.connect(
+        host=os.environ["gateway01.ap-southeast-1.prod.aws.tidbcloud.com"],
+        port=4000,
+        user=os.environ["2W4sHi5ewciZ98n.root"],
+        password=os.environ["PEhLivq4HXSUgDAx"],
+        database=os.environ.get(
+            "TIDB_DATABASE", "reserv-seminardb"
+        ),
+        cursorclass=pymysql.cursors.DictCursor,
+        connect_timeout=15,
+        read_timeout=20,
+        write_timeout=20,
+        ssl_ca=certifi.where(),
+        ssl_verify_cert=True,
+        ssl_verify_identity=True
+    )
