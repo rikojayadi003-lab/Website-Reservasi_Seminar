@@ -1,17 +1,14 @@
-
 import os
 import pymysql
 import certifi
 
 def get_db_connection():
     return pymysql.connect(
-        host=os.environ["gateway01.ap-southeast-1.prod.aws.tidbcloud.com"],
+        host=os.environ["TIDB_HOST"],
         port=4000,
-        user=os.environ["2W4sHi5ewciZ98n.root"],
-        password=os.environ["PEhLivq4HXSUgDAx"],
-        database=os.environ.get(
-            "TIDB_DATABASE", "reserv-seminardb"
-        ),
+        user=os.environ["TIDB_USER"],
+        password=os.environ["TIDB_PASSWORD"],
+        database=os.environ.get("TIDB_DATABASE", "seminar_reservasi"),
         cursorclass=pymysql.cursors.DictCursor,
         connect_timeout=15,
         read_timeout=20,
